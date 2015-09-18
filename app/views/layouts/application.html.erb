@@ -9,7 +9,13 @@
 <body>
   <%= render 'layouts/header' %>
   <div class="container">
-    <!-- 部分テンプレート（erbファイル）の読み込み -->
+    <!-- フラッシュメッセージを出力（ハッシュのキー：message_typeと値：message）-->
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>">
+        <%= message %>
+      </div>
+    <% end %>
+    <!-- 部分テンプレート（erbファイル）：パーシャルの読み込み -->
     <%= yield %>
   </div>
 </body>
