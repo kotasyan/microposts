@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   
   def show
+    # ログインユーザーの投稿を取得
+    @microposts = @user.microposts
   end
   
   def new

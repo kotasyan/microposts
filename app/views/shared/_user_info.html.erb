@@ -1,0 +1,7 @@
+<!-- ログインユーザーのgravatarへのリンクを縦横50pxで表示、current_userを渡す -->
+<%= link_to gravatar_for(current_user, size: 50), current_user %>
+<h1><%= current_user.name %></h1>
+<!-- ユーザーの詳細画面へのリンク -->
+<span><%= link_to "view my profile", current_user %></span>
+<!-- 複数形に変換：ログインユーザーの投稿数を表示-->
+<span><%= pluralize(current_user.microposts.count, "micropost") %></span>
