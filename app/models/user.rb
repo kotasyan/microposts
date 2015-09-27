@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
     validates :email, presence: true, length: {maximum: 255},
                       format: {with: VALID_EMAIL_REGEX},
                       uniqueness: { case_sensitive: false }
+
     # 認証機能を追加
     has_secure_password
 end

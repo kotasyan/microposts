@@ -3,7 +3,14 @@ Rails.application.routes.draw do
   root to: 'static_pages#home'
   # GETリクエスト /signup を usersコントローラのnewアクションに割り当て
   get 'signup', to: 'users#new'
+  # GETリクエスト /login を sessionsコントローラのnewアクションに割り当て
+  get 'login' => 'sessions#new'
+  # 
+  post 'login' => 'sessions#create'
+  # 
+  delete 'logout' => 'sessions#destroy'
   
   # RESTfulなURLを自動生成
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 end

@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
+  # edit, updateアクションの前に、set_userメソッドを実行
+  before_action :set_user, only: [:show, :edit, :update]
+  
   def show
-    # Userデータベースをidで検索
-    @user = User.find(params[:id])
   end
   
   def new
@@ -23,11 +24,32 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+  end
+  
+  def update
+    if @user.update(profile_params)
+      flash[:success] = "Your Profile is updated!"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+  
   private
   
   def user_params
     # 入力パラメータとして、userのname, email, password, password_confirmationのみ許可する（受け取る）
     params.require(:user).permit(:name, :email, :password, 
                                  :password_confirmation)
+  end
+  
+  def profile_params
+    params.require(:user).permit(:name, :email, :profile, :location)
+  end
+  
+  def set_user
+    # Userデータベースをidで検索
+    @user = User.find(params[:id])
   end
 end
