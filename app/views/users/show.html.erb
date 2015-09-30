@@ -9,6 +9,8 @@
         </section>
     </aside>
     <div class="col-md-8">
+        <!-- ログインしている（かつ自分の詳細ページでない）場合は、フォロー/アンフォローボタンを表示 -->
+        <%= render 'follow_form' if logged_in? %>
         <!-- ユーザーの投稿が空でない場合 -->
         <% if @user.microposts.any? %>
             <h3>Microposts (<%= @user.microposts.count %>)</h3>

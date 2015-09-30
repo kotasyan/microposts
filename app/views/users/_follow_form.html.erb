@@ -1,0 +1,13 @@
+<!-- 現在のユーザーが@userではない場合 -->
+<% if current_user != @user %>
+    <div id="follow_form">
+    <!-- 現在のユーザーが@userをフォローしている場合 -->
+    <% if current_user.following?(@user) %>
+        <!-- アンフォローボタンを表示 -->
+        <%= render 'unfollow' %>
+    <% else %>
+        <!-- フォローしていない場合は、フォローボタンを表示 -->
+        <%= render 'follow' %>
+    <% end %>
+    </div>
+<% end %>
