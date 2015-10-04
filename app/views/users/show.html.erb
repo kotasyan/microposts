@@ -7,6 +7,22 @@
                 <%= @user.name %>
             </h1>
         </section>
+        <section class="col-md-4">
+            <% if @following_users == nil %>
+                <%= link_to("0 followings", followings_user_path) %>
+            <% else %>
+                <%= link_to("#{@following_users.count} followings", 
+                           followings_user_path) %>
+            <% end %>
+        </section>
+        <section class="col-md-4 col-md-offset-1">
+            <% if @follower_users == nil %>
+                <%= link_to("0 followers", followers_user_path) %>
+            <% else %>
+                <%= link_to("#{@follower_users.count} followers",
+                            followers_user_path) %>
+            <% end %>
+        </section>
     </aside>
     <div class="col-md-8">
         <!-- ログインしている（かつ自分の詳細ページでない）場合は、フォロー/アンフォローボタンを表示 -->

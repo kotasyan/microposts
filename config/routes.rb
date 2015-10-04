@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   
   # RESTfulなURLを自動生成
-  resources :users
+  resources :users do
+    member do
+      get 'followings'
+      get 'followers'
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts
   resources :relationships, only: [:create, :destroy]

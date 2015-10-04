@@ -1,0 +1,36 @@
+<h1>followings</h1>
+
+<!-- followingsが空でない場合 -->
+<% if @following_users.any? %>
+<div class="row">
+    <ol class="followings">
+    <% @following_users.each do |following| %>
+       <li class="following">
+            <div class="col-md-2 col-md-offset-2">
+                <!-- Gravatarへのリンクを表示 -->
+                <%= link_to gravatar_for(following, size: 50), following %>
+            </div>
+            <!-- ユーザーの詳細画面へのリンクを表示 -->
+            <span class="user col-md-4">
+                <%= link_to following.name, following %>
+            </span>
+            <div class="btn col-md-2">
+            <!-- ログインユーザーがfollowingではない場合 -->
+             <% if logged_in? && current_user != following %>
+                <div id="follow_form">
+                <!-- 現在のユーザーがfollowerをフォローしている場合 -->
+                <% if current_user.following?(following) %>
+                    <!-- アンフォローボタンを表示 -->
+                    <%= render 'unfollow' %>
+                <% else %>
+                    <!-- フォローしていない場合は、フォローボタンを表示 -->
+                    <%= render 'follow' %>
+                <% end %>
+                </div>
+            <% end %>
+            </div>
+        </li>
+    <% end %>
+    </ol>
+<% end %>
+</div>

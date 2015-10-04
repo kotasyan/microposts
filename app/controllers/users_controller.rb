@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   # edit, updateアクションの前に、set_userメソッドを実行
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :followings, :followers]
   
   def show
+    @following_users = @user.following_users
+    @follower_users = @user.follower_users
     # ログインユーザーの投稿を取得
     @microposts = @user.microposts
   end
@@ -36,6 +38,16 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+  
+  # フォローしているユーザーを表示する
+  def followings
+    @following_users = @user.following_users
+  end
+  
+  # フォローされているユーザーを表示する
+  def followers
+    @follower_users = @user.follower_users
   end
   
   private
