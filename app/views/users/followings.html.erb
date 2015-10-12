@@ -14,30 +14,6 @@
             <span class="user col-md-4">
                 <%= link_to following.name, following %>
             </span>
-            <div class="btn col-md-2">
-            <!-- ログインユーザーがfollowingではない場合 -->
-             <% if logged_in? && current_user != following %>
-                <div id="follow_form">
-                <!-- 現在のユーザーがfollowingをフォローしている場合 -->
-                <% if current_user.following?(following) %>
-                    <!-- アンフォローボタンを表示 -->
-                    <%= form_for(current_user.following_relationships.
-                                 find_by(followed_id: following.id),
-                                 html: { method: :delete },
-                                 remote: true) do |f| %>
-                    <%= f.submit "Unfollow", class: "btn" %>
-                    <% end %>
-                <% else %>
-                    <!-- フォローしていない場合は、フォローボタンを表示 -->
-                    <%= form_for(current_user.following_relationships.build, 
-                                 remote: true) do |f| %>
-                    <div><%= hidden_field_tag :followed_id, following.id %></div>
-                    <%= f.submit "Follow", class: "btn btn-primary" %>
-                    <% end %>
-                <% end %>
-                </div>
-            <% end %>
-            </div>
         </li>
     <% end %>
     </ol>
